@@ -1,8 +1,8 @@
 [Unit]
-Description=Run generate-index.service everyday at 5:00
+Description=Run generate-index.service everyday at 5:00 a.m(PST)
 
 [Timer]
-OnCalendar=Mon....Sun *-*-* 5:00 
+OnCalendar=*-*-* 5:00:00 Canada/Pacific
 Persistent=true
 
 [Install]
