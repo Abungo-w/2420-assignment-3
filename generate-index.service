@@ -1,0 +1,9 @@
+[Unit]
+Description=Runs the generate_index file
+
+[Service]
+Type=simple
+ExecStart=/var/lib/webgen/bin/generate_index
+
+[Install]
+WantedBy=multi-user.target

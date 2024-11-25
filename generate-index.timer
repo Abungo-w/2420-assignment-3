@@ -1,0 +1,9 @@
+[Unit]
+Description=Run generate-index.service everyday at 5:00
+
+[Timer]
+OnCalendar=Mon....Sun *-*-* 5:00 
+Persistent=true
+
+[Install]
+WantedBy=timer.target
