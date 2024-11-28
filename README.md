@@ -8,7 +8,16 @@
 In this repository, you will find a file named `setup`. Running this file will set up a bash script that generates a static `index.html` file containing system information that will automatically run every day at 5:00 AM PST. Then displaying the `index.html` on a web server hosted on your Arch Linux droplet using Nginx. Additionally, it includes a `ufw` firewall configuration for system security.
 
 ## Instructions
-To start off, you will need to clone this repository into your home directory.
+Before we start, make sure you have the latest version of Linux. 
+```
+sudo pacman -Syu
+```
+Then reboot your system.
+```
+sudo systemctl reboot
+```
+
+We will start off by cloning this repository into your home directory.
 Use the following command to clone the repository:
 ```
 https://github.com/Abungo-w/2420-assignment-3.git
@@ -18,7 +27,7 @@ Use the following command to run the setup file:
 ```
 sudo ./setup
 ```
-> **_NOTE:_**  Make sure your linux system is upto date before you run the setup file.
+> **_NOTE:_**  The setup might fail if you don't have your linux system up to date. Make sure to update it and reboot before you run the setup file!
 
 ## Web Server Result
 This is what the webpage should look like when you enter your Arch Linux droplet IP address on a web browser.
