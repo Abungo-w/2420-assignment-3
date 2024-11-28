@@ -10,6 +10,8 @@
 # [1]https://www.cyberciti.biz/tips/shell-root-user-check-script.html
 # [2]https://devhints.io/bash#conditionals
 # [3]https://wiki.archlinux.org/title/Pacman
+# [4]https://man.archlinux.org/man/useradd.8
+# [5]https://man.archlinux.org/man/ln.1
 
 ### Error Checking ###
 
@@ -37,7 +39,10 @@ pacman -S --noconfirm --needed nginx ufw
 
 sudo useradd -r -m -d /var/lib/webgen -s /usr/bin/nologin webgen
 # Creating a system user named webgen with a home directory at /var/lib/webgen and a login shell appropriate for a non-login user
-# creating a system user for this task will help with 
+# -r Create a system account.[4]
+# -m Create the user's home directory if it does not exist.[4]
+# -d defines the home directory at /var/lib/webgen.[4]
+# -s sets the path to the user's login shell as /usr/bin/nologin to prevent login access.[4]
 
 
 mkdir /var/lib/webgen/bin
@@ -85,7 +90,8 @@ cp ./server-block.conf /etc/nginx/sites-available
 # copying the server-block.conf file to /etc/nginx/sites-available
 
 ln -s /etc/nginx/sites-available/server-block.conf /etc/nginx/sites-enabled/server-block.conf
-# ma
+# making a symbolic link between /etc/nginx/sites-available/server-block.conf and /etc/nginx/sites-enabled/server-block.conf
+# make symbolic links instead of hard links.[5]
 
 systemctl enable --now nginx
 # enabling nginx to start automatically at boot and start it immediately
