@@ -1,0 +1,100 @@
+#!/bin/bash
+
+#: Filename     : setup
+#: Description  : This script will sets up all the files in the cloned repository.
+#: Author       : Hai Wu
+#: Date         : Nov 27 2024
+#: Version      : 1.0
+
+#: References :
+# [1]https://www.cyberciti.biz/tips/shell-root-user-check-script.html
+# [2]https://devhints.io/bash#conditionals
+# [3]https://wiki.archlinux.org/title/Pacman
+
+### Error Checking ###
+
+if [[ "$EUID" -ne 0 ]]; then
+# This statment checks if this shell script is being run as the root user or not.[1]
+# "$EUID" is a built-in variable in Bash that holds the Effective User ID of the current user.[1]
+# -ne checks if Effective User ID is not equal to 0 then outputs an error message.[2]
+# 0 is the root user ID
+  echo "Please run this script with sudo privilege"
+  # Error message
+  exit 1
+  # Ends the script
+fi
+
+### Main Script ###
+
+pacman -S --noconfirm --needed nginx ufw
+# Installing the required packages for the setup: 
+# nginx 
+# ufw.
+# --noconfirm ignores the confirmation message the system ask when installing the packages.[3]
+# --needed avoides reinstallating the existing packages.[3]
+
+## Task 1 ##
+
+sudo useradd -r -m -d /var/lib/webgen -s /usr/bin/nologin webgen
+# Creating a system user named webgen with a home directory at /var/lib/webgen and a login shell appropriate for a non-login user
+# creating a system user for this task will help with prevent interference with other users
+
+
+mkdir /var/lib/webgen/bin
+mkdir /var/lib/webgen/HTML
+# creating a bin and html directory inside webgen home directory
+
+cp ./generate_index /var/lib/webgen/bin
+# Copying the generate_index script to /var/lib/webgen/bin
+
+chmod +x /var/lib/webgen/bin/generate_index
+# Making the generate_index bash script executable
+
+chown -R webgen:webgen /var/lib/webgen
+# Changing the user and group ownership of /var/lib/webgen and its subdirectories
+
+
+## Task 2 ##
+
+cp ./generate-index.service /etc/systemd/system
+cp ./generate-index.timer /etc/systemd/system
+# Copying the system unit files to /etc/systemd/system
+
+systemctl daemon-reload
+
+systemctl start generate-index.service
+
+systemctl start generate-index.timer
+
+systemctl enable generate-index.timer
+
+## Task 3 ##
+
+mv /etc/nginx/nginx.conf ~/
+# moving the original nginx.conf file to home directory as back up
+
+cp ./nginx.conf /etc/nginx
+# copying the new nginx.conf to /etc/nginx
+
+mkdir /etc/nginx/sites-available
+mkdir /etc/nginx/sites-enabled
+
+cp ./server-block.conf /etc/nginx/sites-available
+
+ln -s /etc/nginx/sites-available/server-block.conf /etc/nginx/sites-enabled/server-block.conf
+
+systemctl start nginx
+
+systemctl enable nginx
+
+## Task 4 ##
+
+ufw allow ssh
+
+ufw allow http
+
+ufw limit ssh
+
+ufw enable
+
+
