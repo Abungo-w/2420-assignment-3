@@ -32,6 +32,13 @@ sudo ./setup
 ```
 > **_NOTE:_**  The setup might fail if you don't have your linux system up to date. Make sure to update it and reboot before you run the setup file!
 
+Use the the following command to check if the timer service is active and that the service runs successfully:
+```
+sudo systemctl status generate-index.timer
+```
+```
+sujournalctl -u your-service.service
+```
 ## Web Server Result
 This is what the webpage should look like when you enter your Arch Linux droplet IP address on a web browser.
 ![The webpage for index.html](./assets/success-screenshot.png)
