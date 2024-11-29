@@ -2,8 +2,8 @@
 ## Table of Contents
 1. [Introduction](#introduction)
 2. [Instructions](#instructions)
-3. [Web Server Result](#Web_Server_Result)
-4. [update index.html](#update_index.html)
+3. [Web Server Result](#web-server-result)
+4. [Update index.html](#update-index.html)
 
 ## Introduction
 This is an Linux assignment where I have to create a web server by setting up a bash script that generates a static `index.html` file containing system information that will automatically run every day at 5:00 AM PST. Then displaying the `index.html` on a web server hosted on your Arch Linux droplet using Nginx. Additionally, it includes a `ufw` firewall configuration for system security.
