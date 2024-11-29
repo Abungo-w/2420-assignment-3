@@ -73,6 +73,7 @@ For example, if you want to add and display cpu info, add this line into the `ge
 cpu=$(cat /proc/cpuinfo)
 ```
 - `cat` reads the /proc/cpuinfo file where all the cpu info is stored, then storing it in a variable call cpu
+
 Then add a new line that calls the variable into the html body:
 ```
 <p><strong>CPU info:<strong> $cpu</p>
