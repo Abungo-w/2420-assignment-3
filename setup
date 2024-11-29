@@ -84,13 +84,13 @@ cp ./nginx.conf /etc/nginx
 
 mkdir /etc/nginx/sites-available
 mkdir /etc/nginx/sites-enabled
-# making 
+# making new directories for our server block 
 
 cp ./server-block.conf /etc/nginx/sites-available
 # copying the server-block.conf file to /etc/nginx/sites-available
 
 ln -s /etc/nginx/sites-available/server-block.conf /etc/nginx/sites-enabled/server-block.conf
-# making a symbolic link between /etc/nginx/sites-available/server-block.conf and /etc/nginx/sites-enabled/server-block.conf
+# making a symbolic link between /etc/nginx/sites-available/server-block.conf and /etc/nginx/sites-enabled/server-block.conf to enable the site. You can disable the site by removing the symbolic link.
 # make symbolic links instead of hard links.[5]
 
 systemctl enable --now nginx
